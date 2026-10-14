@@ -1,0 +1,67 @@
+[
+  {
+    "type": "suffix",
+    "domain": "anthropic.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "claude.ai",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "claude.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "sentry.io",
+    "enabled": true
+  },
+  {
+    "type": "exact",
+    "domain": "cdn.growthbook.io",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "claudeusercontent.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "claudemcpcontent.com",
+    "enabled": true
+  },
+  {
+    "type": "exact",
+    "domain": "challenges.cloudflare.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "openai.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "chatgpt.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "oaistatic.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "oaiusercontent.com",
+    "enabled": true
+  },
+  {
+    "type": "suffix",
+    "domain": "chatgpt.site",
+    "enabled": true
+  }
+]

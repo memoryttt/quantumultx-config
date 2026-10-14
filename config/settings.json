@@ -1,0 +1,13 @@
+{
+  "repository": "memoryttt/quantumultx-config",
+  "branch": "main",
+  "path_prefix": "",
+  "policy_name": "AI",
+  "node_filter": ".*",
+  "update_interval": 86400,
+  "dns": {
+    "mode": "split",
+    "default_servers": ["223.5.5.5", "119.29.29.29"],
+    "ai_doh": "https://1.1.1.1/dns-query"
+  }
+}

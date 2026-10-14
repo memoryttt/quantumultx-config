@@ -1,0 +1,14 @@
+# Generated from config/ai-domains.json; use force-policy to select an exit.
+host-suffix, anthropic.com, proxy
+host-suffix, claude.ai, proxy
+host-suffix, claude.com, proxy
+host-suffix, sentry.io, proxy
+host, cdn.growthbook.io, proxy
+host-suffix, claudeusercontent.com, proxy
+host-suffix, claudemcpcontent.com, proxy
+host, challenges.cloudflare.com, proxy
+host-suffix, openai.com, proxy
+host-suffix, chatgpt.com, proxy
+host-suffix, oaistatic.com, proxy
+host-suffix, oaiusercontent.com, proxy
+host-suffix, chatgpt.site, proxy
