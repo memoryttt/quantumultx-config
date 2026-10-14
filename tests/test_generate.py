@@ -40,12 +40,20 @@ class GenerationTests(unittest.TestCase):
         self.assertNotIn('disabled.net', dns + rules)
         self.assertIn('host-suffix, example.com, proxy', rules)
         self.assertIn('host, login.other.net, proxy', rules)
+        profile = (root / 'qx.conf').read_text()
+        self.assertEqual(profile.count('[dns]'), 1)
+        for line in dns.splitlines():
+            if line.startswith('doh-server = '):
+                self.assertIn(line, profile)
 
     def test_policy_is_configurable_without_changing_rule_list(self):
         root, result = self.run_generator({'policy_name': '工作AI', 'node_filter': '日本|美国'})
         self.assertEqual(result.returncode, 0, result.stderr)
         profile = (root / 'qx.conf').read_text()
-        self.assertIn('static = 工作AI, proxy, server-tag-regex=日本|美国', profile)
+        self.assertIn('static = 工作AI, server-tag-regex=日本|美国', profile)
+        self.assertNotIn('static = 工作AI, proxy,', profile)
+        integration = (root / 'snippets/integration.conf').read_text()
+        self.assertIn('static = 工作AI, server-tag-regex=日本|美国', integration)
         self.assertIn('force-policy=工作AI', profile)
         self.assertNotIn('美国住宅', profile)
         self.assertIn('server = 223.5.5.5', profile)

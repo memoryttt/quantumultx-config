@@ -1,14 +1,20 @@
 # Quantumult X 自用配置
 
-可订阅的 AI 分流规则、DNS 片段和简易主配置。AI 出口使用手动策略组，可以在 QX 中选择任意已导入节点。
+一份包含 DNS、策略组和 AI 规则订阅入口的完整 QX 配置。AI 组只列出具体节点，手动选择出口，不含跟随内置代理的 `proxy` 选项。
+
+## 直接使用完整配置
+
+导入 [qx.conf](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/qx.conf)，在 QX 本机添加私人节点订阅，然后在“AI”组中选择具体节点即可。所有 DNS 设置已经包含在主配置的 `[dns]` 中，无需再导入 DNS 片段。
+
+更新 DNS 或策略组时刷新这份完整配置；AI 规则仍由它引用的远程订阅自动更新。导入前备份现有配置和本机私人设置。
 
 ## 链接
 
 | 内容 | 链接 |
 | --- | --- |
 | AI 规则，供远程分流订阅 | [rules/ai.list](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/rules/ai.list) |
-| AI 域名专用 DNS，复制到现有配置 | [snippets/ai-dns.conf](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/snippets/ai-dns.conf) |
-| 策略组和订阅接入示例 | [snippets/integration.conf](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/snippets/integration.conf) |
+| 可选：合并到其他主配置的 DNS 条目 | [snippets/ai-dns.conf](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/snippets/ai-dns.conf) |
+| 可选：现有配置接入示例 | [snippets/integration.conf](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/snippets/integration.conf) |
 | 简易完整主配置 | [qx.conf](https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/qx.conf) |
 
 ## 已经使用墨鱼等现有配置
@@ -18,7 +24,7 @@
 在 `[policy]` 增加手动策略组：
 
 ```ini
-static = AI, proxy, server-tag-regex=.*
+static = AI, server-tag-regex=.*
 ```
 
 在 `[filter_remote]` 添加：
@@ -37,7 +43,7 @@ https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/rules/ai.lis
 
 先备份现有配置，再导入 `qx.conf`。这是独立的最小配置，包含 AI 手动分组、全球加速手动分组、局域网和国内直连、其余代理。它不包含墨鱼配置的广告规则、重写、脚本或证书。
 
-节点订阅在 QX 本机添加，并在“AI”和“全球加速”组中选择节点。本仓库不提供节点；默认 `proxy` 使用 QX 当前选择的代理，导入节点前不能依靠它联网。
+节点订阅在 QX 本机添加，并在“AI”和“全球加速”组中选择节点。本仓库不提供节点；AI 组只展示满足 `node_filter` 的具体节点，未导入节点或筛选不到节点时需要先添加节点或调整筛选条件。“全球加速”仍保留 `proxy` 选项，可跟随 QX 内置代理的选择。
 
 不要将私人订阅 URL、Sub-Store token、节点密码或 MITM 证书上传至公开仓库。重新导入主配置前保存本机的私人设置，更新可能覆盖这些设置。
 
@@ -55,7 +61,7 @@ https://raw.githubusercontent.com/memoryttt/quantumultx-config/main/rules/ai.lis
 | `split`，默认 | 清单中的域名使用 `ai_doh`，其余使用 `default_servers` |
 | `global` | 默认使用 `ai_doh`，不添加国内默认 DNS |
 
-`snippets/ai-dns.conf` 始终只含域名专用 DNS 条目，便于合并到其他配置。它不会自动改变你的现有主配置。
+完整 `qx.conf` 已包含当前模式所需的全部 DNS 设置。`snippets/ai-dns.conf` 仅作为合并到其他配置的兼容入口保留，使用完整配置时无需操作它。
 
 策略组当前选中的节点保存在 QX 本机，日常切换不需要修改仓库。`rules/ai.list` 里的通用 `proxy` 由订阅行的 `force-policy` 覆盖。修改策略组名称后，也要同步 QX 本机的策略定义和订阅行；仅更新规则不会改组名。
 
